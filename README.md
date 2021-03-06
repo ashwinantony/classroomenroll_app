@@ -1,4 +1,4 @@
-# classroomenroll_app
+# Classroom Enrollment - Student Portal
 
 Dear fellow Django developer,
 
