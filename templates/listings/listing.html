@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %} | {{listing.title}} {% endblock %}
+
+{% block content %}
+
+<!-- Listing Title Hero -->
+<section id="showcase-inner" class="py-5">
+    <div class="container">
+        <div class="row text-center text-white">
+            <div class="col-md-12">
+                <h1 class="display-4">{{listing.title}}</h1>
+                <p class="lead"></p>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+
+<!-- Alerts -->
+{% include 'partials/_alerts.html' %}
+
+
+<!-- Listing -->
+<section id="listing" class="py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+
+                <!-- Description -->
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <h5 class="card-title">Classroom and Course Description :</h5>
+                        {{listing.description}}
+                    </div>
+                </div>
+            </div>
+
+            <!--  Teacher Details-->
+            <div class="col-md-3">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Taken by :</h5>
+                        <h6 class="text-secondary">{{listing.teacher}}</h6>
+                    </div>
+                </div>
+
+                {% if user.is_authenticated %}
+                <form action="{% url 'enroll' %}" method="post">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="class_id" value="{{listing.id}}">
+                    <input type="hidden" name="class_title" value="{{listing.title}}">
+                    <input type="hidden" name="student_id" value="{{user.id}}">
+                    <input type="hidden" name="student_name" value="{{user.first_name}} {{user.last_name}}">
+                    <input type="hidden" name="student_email" value="{{user.email}}">
+
+                    <input type="submit" value="Enroll" class="btn btn-block btn-primary">
+                </form>
+                {% else %}
+                <h5 class="card-title text-center">
+                    <strong> Please login to enroll </strong>
+                </h5>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %} | Dashboard {% endblock %}
+
+{% block content%}
+
+<section id="showcase-inner" class="py-5">
+    <div class="container">
+        <div class="row text-center text-white">
+            <div class="col-md-12">
+                <h1 class="display-4">Welcome {{user.first_name}} to your Dashboard!</h1>
+                <p class="lead">View your enrolled classrooms here</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Dashboard Enrolled Classes -->
+<section id="dashboard" class="py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                {% if enrolled_classes %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Class Name</th>
+                            <th scope="col">Enrolled Date and Time</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for enrolled_class in enrolled_classes %}
+                        <tr>
+                            <td>{{ enrolled_class.class_title }}</td>
+                            <td>{{ enrolled_class.contact_date }}</td>
+                            <td>
+                                <a class="btn btn-primary" href="{% url 'listing' enrolled_class.class_id %}">
+                                    View Class details
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="text-center">
+                    <strong> Uh-Oh! You have not enrolled for any classes yet.</strong><br>
+                    Enroll Quickly before course starting day.
+                </p>
+                </p>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

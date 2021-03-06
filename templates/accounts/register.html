@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %} | Register {% endblock %}
+
+{% block content%}
+
+<!-- Hero -->
+<section id="showcase-inner" class="py-5">
+    <div class="container">
+        <div class="row text-center text-white">
+            <div class="col-md-12">
+                <h1 class="display-4">Welcome to Student Portal</h1>
+                <p class="lead">Register and Enroll to your favorite classes right away!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="register" class="bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h4><i class="fas fa-user-plus"></i> Register</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Alerts -->
+                        {% include 'partials/_alerts.html' %}
+
+
+                        <!-- Register Form -->
+                        <form action="{% url 'register' %}" method="POST">
+                            <!-- csrf_token is used to prevent crosssite scripting: Security measure -->
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="student_name">Name</label>
+                                <input type="text" name="student_name" class="form-control" required
+                                    placeholder="eg. -- John Smith --">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" required
+                                    placeholder="eg. -- john@pheonix.com -- ">
+                            </div>
+                            <div class="form-group">
+                                <label for="password2">Password</label>
+                                <input type="password" name="password" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Confirm Password</label>
+                                <input type="password" name="password2" class="form-control" required>
+                            </div>
+                            <input type="submit" value="Register" class="btn btn-secondary btn-block">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
